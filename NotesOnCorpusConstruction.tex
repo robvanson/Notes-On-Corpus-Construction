@@ -1,0 +1,345 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[hscale=0.8,vscale=0.8]{geometry}
+\usepackage{amsmath,hyperref,comment}
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{relsize}
+\usepackage{pifont}
+\usepackage{tipa}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[english,cleanlook]{isodate}
+
+\newcommand{\YEAR}{\the\year}
+
+\begin{document}
+
+
+\title{\bf{Notes on Corpus Construction}}
+
+\author{R.J.J.H. van Son \\
+AVL, Amsterdam \& ACLC/IFA, University of Amsterdam\\
+the Netherlands\\
+\emph{R.J.J.H.vanSon@gmail.com}}
+
+\begin{center}
+\section*{\bf{Notes on Corpus Construction}}
+\large{R.J.J.H. van Son}
+\end{center}
+
+\tableofcontents
+
+\maketitle             % typeset the title of the contribution
+
+\begin{abstract}
+\noindent Corpora of spoken language are both important for research, rare, and frequently difficult to use. These notes give some suggestions to ease the construction and distribution of corpora.
+\end{abstract}
+
+
+\section{Introduction}
+
+During short term research projects there tends to come a moment where the question is raised whether and how to preserve the data gathered over the years. The present notes are intended to help researchers who want to preserve the data gathered in their projects and make these data available to other researchers. I want to suggest some tips that might help to improve the availability of original research data and ease the efforts needed to make them available. There are good books that go into detail about the planning and construction of language corpora \cite{wynne2005developing,gibbon1997handbook,gibbon2000handbook} as well as conferences, e.g., LREC, and specialized workshops \cite{draxler2012using,macwhinney2012best,cieri2012toward,drude2012best}. Some general, common sense, rules for handling digital data can be found in \cite{hart2016ten}. The current notes will be limited to practical tips on how to convert existing, small, data sets into a corpus.
+
+The focus of these notes will be on mostly static data from small and short term research projects, e.g., by PhD students or Post-Docs, but the suggestions can easily be adapted to other situations. In such projects, the amount of data is limited and the time available to organize them is even more limited. The data should be organized in such a way that it can be stored indefinitely on a single departmental server. However, it should be easy to add more data to an existing corpus or to copy and move the whole collection from one location to another. For an example of how to construct a much larger corpus, please see the \emph{Spoken Dutch Corpus} \cite{oostdijk2000spoken,oostdijk2001design} or the \emph{DOBES} project \cite{wittenburg2002methods}.
+
+
+These notes will discuss corpus construction based on a few example spoken language corpora that are available from the IFA Spoken Language Corpora \cite{VanSonetal2001,vanSon2008ifadv,VanSon2009Prom,IFA}. The topics that will be discussed are: Corpus structure, content and documentation, and distribution. These topics will be illustrated with a few examples
+
+
+\section{Corpus Structure}
+
+We assume a corpus that consists of files which are stored in directories. A corpus is a storage structure for (primary) data. As such it should help in bookkeeping of experimental data. The first question will be where to store the resulting corpus. The best location would be on a well maintained web server or the ``cloud'' (e.g., Dropbox \cite{Dropbox}). In one stroke, such on-line storage would take care of many chores, from back-ups to distribution. But if such a solution is not available, you can start small, just a hard drive to work on is enough, and preferably, a second drive to back up to. 
+
+\subsection{Recordings and media}
+
+The first decision to make when constructing a corpus is \emph{What data should be stored in the corpus?} We can make a distinction between original media, e.g., texts, audio and video recordings, but also EEG recordings, and data connected to these media, e.g., annotations, subject responses or evaluations, and analysis results. Beside these data, there is also metadata about the subjects involved and experimental circumstances. These can most easily be stored in a separate section of the corpus.
+
+A decision that has to be made on this topic is the \emph{unit of data} that should be stored. As everything is stored as files, each file should contain a  \emph{unit of data}. This can be a text, or a text fragment. It can be a sound recording, but also sections of a sound recording or even individual utterances or words. Storing several copies or parts of each item complicates the corpus considerably. It becomes time consuming to ensure that all instances of a certain item are correctly selected and updated when there is a correction or replacement. And it is almost inevitable that there will be corrections and replacements at some stage in the building and use of a corpus. 
+
+There is one exception to the advice to keep only single instances of every data item. When a corpus is constructed by processing original materials, e.g., edited video recordings or large texts, then it is advisable to keep archival copies of the original materials. However, these archival copies do not have to be part of the \emph{real} corpus. This is especially important for video and audio recordings. It is very likely that such recordings will not be used in the format they were recorded in. Very often, video or audio compression has to be applied. The format conversions can lead to artifacts or loss of information \cite{van2005study}. Accessing the original data can then be necessary to be able to decide how to interpret ambiguous or suspicious observations.
+
+\subsection{Directories}
+
+The corpus will be organized in directories. Files of a single type that belong together will be stored in a single directory. This means, that in a video dialog corpus, all video recordings can be stored in a single directory. The extracted audio files will be stored in a different directory, as will be the transliterations of the speech and the annotations of, e.g., gaze direction. In more complex corpora, it could be better to group files in sub-, or sub-sub-directories. So, a corpus of pathological speech build from a group of separate studies could have separate sub-directories for different pathologies, and sub-sub-directories of the different tasks which were recorded, and sub-sub-subdirectories for the different studies from which the recording were taken.
+
+The easiest way to organize such a complex corpus would be to make mirror directory trees for the different types of recordings (media), and transliterations and annotations. So, if video recording X.avi would be stored in directory \emph{Video/A/B/C/D/X.avi}, then the associated audio file X.wav should be stored in \emph{Audio/A/B/C/D/X.wav}, the EEG in \emph{EEG/A/B/C/D/X.bdf}, the transliteration in \emph{Translit/A/B/C/D/X.txt}, and the annotations in \emph{Annotations/A/B/C/D/X.TextGrid}. Note that each directory contains files of uniform type. This greatly simplifies analysis, versioning, and backup. This scheme works best when files referring to the same recording file share the same name, e.g., like the \emph{X} in the example.
+
+\subsection{File names}
+
+File names are tricky. It is best to ensure that every filename in the corpus is unique. If not, data will get lost if a file accidentally ends up in the wrong directory. When working with existing non-unique filenames in a more complicated corpus, there is an easy way to make them unique: Prepend the directory path in front of the filename. For example, if there are many files with duplicate names in different subdirectories, e.g., \emph{Audio/A/B/C/D1/X.wav} and \emph{Audio/A/B/C/D2/X.wav}, converting the filenames form \emph{X.wav} to \emph{A\_B\_C\_D1\_X.wav} and  \emph{A\_B\_C\_D2\_X.wav} would suffice to make every filename unique. Such a change can easily be scripted and automated in, e.g., \emph{Praat} \cite{Praat}. Note that using spaces in file names can seriously complicate automatic processing. It is best to use a character like `\_' instead of a space.
+
+It is also very convenient when the filename transparently indicates where it belongs and what it contains. For the example of a two camera recording in a dialogue video corpus, file names could start with \emph{DVA[num][FM][age][A-Z]} for recordings of camera A and \emph{DVB[num][FM][age][A-Z]} for the recordings of camera B. The \emph{number} would be the number of the dialogue, \emph{[FM]} would indicate Female or Male speaker, the age would give the age in years of the speaker, and the letter \emph{[A-Z]} would indicate the speaker in view. So, any file whose name starts with \emph{DVA14M62W} would be from camera \emph{A}, dialogue \emph{14}, and male, 62 year old speaker \emph{W}. The corresponding partner recording in this would be \emph{DVB14M72X}. The file type tells us what is stored in the file. \emph{DVB14M72X}.dv for the uncompressed video, \emph{DVB14M72X}.avi for the compressed video, \emph{DVB14M72X}.wav for the audio. \emph{DVB14M72X}.TextGrid for the annotations, etc. \cite{vanSon2008ifadv,VanSon2009Prom}. Note that the above practice of prepending directory names in front of the filename to make the filename unique also makes it transparent where the file belongs in the corpus. 
+
+It is common to annotate or extract parts of the items in a language corpus, e.g., sentences and words from texts, or utterances and words from spoken language recordings. When such parts have to be named, it is very useful to prepend the item name with the (unique) name of the originating file. For example, finding an utterance recording with the name \emph{DVA14M62W1J} (e.g., turn \emph{1}, sentence \emph{J} of recording \emph{DVA14M62W}), it is easy to find the relevant (meta-) information in the corpus. This transparency is also useful for checking whether selections and (meta-) data are correct. Some quite elaborate item naming schemes can be found in \cite{VanSonetal2001,vanSon2008ifadv,VanSon2009Prom}.
+
+\section{Content and documentation}
+
+The contents of a corpus can be divided into three categories:
+\begin{itemize}
+\item \emph{Primary data}\\Original recordings and observations
+\item \emph{Meta-data and documentation}\\Information on Primary data
+\item \emph{Derived content}\\Everything that can be reproduced from the other two
+\end{itemize}
+The first two, \emph{primary} and \emph{meta-data} are the real content of the corpus. The third category, \emph{derived content}, is only stored because of convenience. The fact that \emph{derived content} can be reproduced does not mean that it should be reproduced every time. Only that when \emph{primary} and \emph{meta-data} are changed or adapted, the dependent \emph{derived content} can be regenerated. In storage and back-up procedures, \emph{primary} and \emph{meta-data} should be handled with extra care. \emph{Derived content} often does not have to be backed up at all.
+
+It must be emphasized that derived content should preferably be generated by automated methods, i.e., scripts. Manual labor is very difficult to reproduce. If an original recording is split up by hand into smaller parts, e.g., utterances, it will be very time consuming to generate a new set after even a minor change. However, if the original segmentation had been stored in a TextGrid file, then it would take only a few changes in the TextGrid annotations and running a script to regenerate the changed set. Moreover, anyone can check whether the original segmentation was indeed correct.
+
+This can be generalized to other aspects of the corpus. Whenever possible, construction and maintenance of a corpus should be automated. Preferably with scripts or other documented means. These automated procedures should be organized in such a way that users of the corpus can maintain or reconstruct the corpus using as little external (insider) knowledge as possible.
+
+\subsection{Participants and procedures}
+
+In a language corpus, it is important to store all relevant data of the speakers, authors, and other subjects that participated in constructing the corpus. Up front, it is often difficult to decide what is relevant and what is not. So there might be an incentive to include as much information as possible. However, many pieces of information about subjects are privacy sensitive and should not be distributed or even included in the corpus. Such privacy sensitive material should be handled with extra care. Some personal data is considered so sensitive in some jurisdictions that it is illegal to collect and store them. Here we can give only some rules of thumb. Please, inform yourself about the laws in your jurisdiction. 
+
+\emph{Sensitive} information should stay ``in house'' and not be distributed without a signed informed consent from the subjects. \emph{Highly sensitive} data should only be stored in a secure environment. An easy way to prevent mishaps is to encode all subject names at the earliest possible moment and store (highly) sensitive data, like contact information, off-line or printed on paper, in a locked closet. At a later stage, relevant information can be compiled from the offline storage and anonymized for the corpus. There are special guidelines for working with data from children and medical records. The short version is that you should not share such data and keep everything behind locks or in a secure environment. The long version is that if you work with such data, you might want to re-read the relevant guidelines.
+
+Every study will have its own requirements for data about the subjects and language. Often some aspects of language use and the subjects are not relevant for the original research. However, other users of the data might need such personal data. So it often pays off to record them anyway. Some types of data are almost always relevant. Data of subjects and circumstances that are generally relevant to construction and use of spoken language corpora can be listed as:
+\begin{itemize}
+\item Contact information of the subjects\\
+      This is highly sensitive and should not be shared
+\item Age in years\\
+      Date of birth is sensitive
+\item Sex/gender
+\item Language variant used, native language, other languages\\
+      Place of origin, e.g., postal code (this can be sensitive if too specific)
+\item Hearing and speaking problems (mostly, the absence thereof)\\
+      When relevant, the nature of any pathologies (highly sensitive)
+\item Recording: Date and Location of the recording and the Name of the person doing the recording
+\item Equipment and recorder settings
+\end{itemize}
+Some data, like the language or technical details of recordings and procedures, tend to be fixed in which case they can be stored in the general documentation.
+
+It is very important to have all the subjects that participate in the creation of the corpus sign the relevant documents (see section \ref{Distribution}). Most importantly are copyright forms that transfers all copyrights to the corpus maintainers and informed consents for speakers and experimental subjects. Make sure that these forms and declarations explicitly include a reference to the distribution of the materials \cite{VanSonetal2001,vanSon2008ifadv,VanSon2009Prom}.
+
+\subsection{File formats}
+
+In general, you should do as little conversions between file formats as possible. But if the aim of the corpus is to make the data available to outsiders, then it makes sense to chose file formats that are in common use. In general, plain text and all formats read by \emph{Praat} \cite{Praat} should be fine. Some applications, like office or specialist video software, produce files that are difficult to use without the exact same software or even computer platform. In such cases, it is best to add copies in generally readable format. Note that, at the time of writing, video codecs are a complete mess \cite{SimonPhipps13}.
+
+If possible, for non-generally readable file formats, ensure that copies using the the following formats are also available in the corpus:
+\begin{itemize}
+\item {\sc Word processor}, e.g., \emph{MS Word}: Plain text and PDF
+\item {\sc Spreadsheet and database}, e.g., \emph{MS Excel}, \emph{MS Access}: Export as Tab Separated Values (.tsv) or Comma Separated Values (.csv)
+\item {\sc Audio}: Uncompressed WAV files, else anything written by \emph{Praat} \cite{Praat} is good
+\item {\sc Pictures}: PNG or JPEG files
+\item {\sc Video}: Compress as little as possible, original DV or MJPEG would be nice, but at least use something that can easily be played with \emph{VLC} \cite{VideoLAN} or \emph{ELAN} \cite{ELAN} (note, \emph{ELAN} video support is platform dependent)
+\item {\sc Annotations}: \emph{Praat} \cite{Praat} TextGrid files or \emph{ELAN} \cite{ELAN} EAF annotations
+\end{itemize}
+
+\subsection{Annotations}
+
+Annotations are interpreted here as texts that are (time) aligned to the recordings \cite{bird2001formal}. These notes will discuss annotation files like those used in \emph{Praat} \cite{Praat} TextGrids and \emph{ELAN} \cite{ELAN} EAF. An annotation generally has a start and end time, a \emph{Tier}, and a text. Other set ups are possible, c.f., \cite{bird2001formal,oostdijk2000spoken,oostdijk2001design}. In corpus construction and maintenance, annotations have two independent functions. The first is to segment the recordings so relevant fragments, e.g., utterances, turns, or words, can be identified and retrieved. The second is to add additional information to the recordings. In general, annotations include a transliteration of the speech as text and a segmentation in utterances (or Inter-Pausal-Units), turns, and sometimes phrases or words. Other annotations used are (in random order): Gaze direction, word stress, backchannel utterances, disfluencies, gestures, or emotions. For adding any information related to fragments of the speech or language, standard annotation files should be used wherever possible. These should be stored as text files (\emph{short text file} in \emph{Praat} \cite{Praat}).
+
+It is most efficient to use a segmentation stored in annotation files to split up recordings. It is fairly straightforward to code a \emph{Praat} script that takes a TextGrid and copies out selected intervals for, e.g., listening experiments. This annotation file is then instant documentation of the segmentation and selection. The segmentation can also be easily adapted and recreated if needed.
+
+\subsection{Metadata and CMDI}
+
+Corpus data have only little value without information about the speakers, authors, task, and recording circumstances. This type of data is called \emph{metadata}. In general, each item in a corpus has its own metadata. If metadata is available, it should be stored in its own, parallel directory tree, just like the annotations. The top level can be called \emph{Info} or \emph{Metadata}. Please consult the relevant standards documents when using browsable metadata hierarchies, \cite{IMDI,CMDI}.
+
+There is extensive literature about the use of metadata in corpus construction, e.g., \cite{WittenburgMetadata,burnard2005metadata,duval2002metadata,hughes2005metadata,broeder2010data}. There are several international metadata standards for language corpora. Early ones are \emph{TEI} \cite{TEI} for text and \emph{IMDI} \cite{IMDI} for multi media data. The \emph{IMDI} standard has been adapted inside the Clarin project \cite{CLARINERIC} to the \emph{CMDI} standard \cite{CMDI,WittenburgCMDI}. The advise is to use \emph{CMDI} to code browsable metadata.
+
+How to compile metadata is outside the scope of these notes. Readers can consult the Clarin user guide by Wittenburg and van Uytvanck \cite{WittenburgMetadata} for more information as well as the relevant corpus handbooks \cite{wynne2005developing,gibbon1997handbook,gibbon2000handbook}. It is important to remember the recommendations from \cite{WittenburgMetadata}:
+\begin{itemize}
+\item Always start as early as possible to collect and create metadata. Otherwise chances are high that information is lost or that fixing the incomplete metadata records afterwards will be very costly.
+\item Try to achieve a high but reasonable level of granularity.
+\item Try to reuse as much as possible. It should save you work and will enhance the interoperability.
+\item Be aware that there are conversion methods in place for the most widely used formats - there is no need to reinvent the wheel.
+\end{itemize}
+
+\subsection{Scripts, programs, and applications}
+
+As much as possible the construction of the corpus and the analysis of the data should be automatized. This even holds for the statistical analysis and the production of figures for publication. Automatization is mostly done through the use of \emph{scripts} or other programs. Experience shows that quite often, such scripts have to be consulted later to (re-)verify the validity of data and procedures, adapt the corpus or analysis to new requirements, and to reuse them for new tasks. Such scripts should be an integral part of the corpus. They will be necessary, not only to manage or rebuild the corpus, but also to understand the corpus and the analysis of the data. If special purpose programs have been used, it should be considered whether the version used in building or analyzing the corpus can be included with the corpus. 
+
+By adding the scripts in fixed directories, either in a separate \emph{Scripts} tree of sub-directories, or as part of the  \emph{Documentation} sub-directory, it will be possible to use relative file paths. Relative file paths are necessary to allow the corpus to be moved from one computer to another. If at all possible, relative file paths should be used in scripts. See the \emph{Praat} manual for examples of the use of relative file paths in scripts \cite{PraatFiles13}.
+
+\subsection{Documentation}
+
+Any information about the corpus that is not stored with the annotations or metadata is documentation. The aim of the documentation is to help users to understand the contents of the corpus, maintainers to extend and correct the corpus, and others to recreate a similar corpus. The documentation is also an archive for what has been done. This will be needed when data from the corpus is used for a publication. So the documentation should at least contain all information that is required for publishing a scientific paper about the contents of the corpus. The documentation section is also a good place to store information about the corpus itself, e.g., contact and license information, scripts and other special purpose software, errata, literature references, manuals. It is often convenient to store compilations of global metadata in the Documentation section, like speaker data and recording lists.
+
+In a corpus, just create a sub-directory called \emph{Documentation} and store any useful files in there. This directory can contain sub-directories as is convenient. Obvious content of a \emph{Documentation} sub-directory are:
+\begin{itemize}
+\item Contact information, copyright and license documents of the corpus
+\item A changes and errata list
+\item A diagram of the corpus structure
+\item Anonymized lists of subjects: Speakers, listeners, and other experimental subjects
+\item Relevant parts of anonymized information about the subjects
+\item A list of recordings, e.g., with dates and the names/codes of those involved
+\item All technical details of the recordings or experiments, preferably with photographs
+\item Copies of any documents and forms given to the subjects, e.g., copyright forms and informed consent declarations (but \emph{not} copies of the signed documents)
+\item Copies of any documents and manuals used during the construction, recording, and annotation of the corpus
+\item All scripts and special purpose programs used in the construction and analysis of the corpus (when not stored in a separate subdirectory)
+\item All publications based on the corpus
+\item A bibliography of the relevant literature, e.g., as a BibTeX reference file
+\end{itemize}
+
+\subsection{Backup}
+
+The advised mind-set is to imagine, every day, that the building where your data reside burns down to the ground. Then think of how you would want to continue with your work. On regular moments, you should try out whether you really \emph{can} continue your work after the building has burned down to the ground.
+
+\subsection{Version control and repositories}
+A spoken language corpus generally consists of static language and speech data and a monotonically increasing amount of annotations, scripts, and other textual materials. The static language data can be backed up once and then the backup has to be updated only infrequently. However, it is almost always good to keep track of changes in the textual materials in a fine grained time scale. Errors happen and often changes will have to be undone. For this, versioning systems should be used \cite{JulieMeloni10}. In short, a version control system will store ``snapshots'' of your texts. It allows you to roll-back your system to any point in its history and even to pick and ``undo'' individual changes made to the system. The most important systems allow to merge changes made by different maintainers at different times. Note that version control systems are mainly useful for textual data, e.g., annotations and documentation. Most systems cannot well handle binary data, like pictures and word processor files.
+
+A version control system will store the history of a project in a \emph{repository}. Such a repository can easily be made available from a website or project server. Such repositories are excellent means to distribute and update corpora. A popular choice of version control system is \emph{Git} \cite{JulieMeloni10}. See the slideshow at \cite{CarterGit2009} for a short introduction. Explaining the use of version control systems is outside the scope of these notes. But there are excellent tutorials and manuals for most popular system, see the links and references in \cite{JulieMeloni10}.
+
+\section{Distribution}\label{Distribution}
+
+The aim of a language corpus is giving other people access to language data. While designing and constructing a corpus, the ways the corpus will be accessed have to be taken into account. The corpora discussed here are small enough to distribute in full. Therefore, there is no pressing need to consider elaborate online search and selection solutions. For practical reasons, subsets of the corpus can be made ``pre-canned'' for download. Otherwise, it is simplest to allow wholesale copying of the corpus to prospective users. The simplest technical solution is to install a web server, e.g., \emph{Apache}, and point it to an index file in the top directory of the corpus. The technological details of this are beyond the scope of these notes, but you can look at the \emph{Apache} documentation for more information \cite{Apache2.4Doc}.
+
+Beyond the file format compatibility issues and useful documentation, there are a few legal matters that have to be dealt with before a corpus can be distributed.
+
+\subsection{Copyrights}\label{Copyrights}
+
+In general, everything spoken or written will fall under copyright protection. In a language corpus, the language that are the primary data in the corpus are almost always protected by copyright law. When spoken language is involved, the speakers have a comparable right as ``performers''. So have the editors of the material. All the written materials and documentation will be protected under copyright law. This list could be extended ad infinitum. Under copyright law, anyone who wants to copy or distribute protected works. a corpus, needs written permission of the ``owners'' of the copyright. That would mean all those involved in constructing the corpus, which is impractical to say the least.
+
+The solution is to ask everyone who participates to sign a copyright transfer form. In this form, the participant transfers all copyrights to the ``owner'' of the corpus, who will then be the sole owner of copyright. This new owner is some legal entity, that will manage and distribute the corpus. In many cases this entity will be some part of the university or research institute. However, it can be the creator of the corpus, or some non-profit organization, e.g., \href{http://taalunie.org/nederlandse-taalunie-0}{Nederlandse Taalunie}. Just remember that this new owner will be the legal owner of the corpus. This entity will decide what will happen with the corpus. So some care might be taken to chose a suitable entity to transfer the copyrights to and to make good, binding agreements about the future of the corpus.
+
+The question on who should all sign a copyright transfer form is not easy to answer. It is best to be ``inclusive'' and just ask every person who touches the data to sign a copyright form. If in doubt, ask for a signature. This policy works best when people give their signature \emph{before} they start with their contribution. This includes all subjects who speak. However, there could be problems when spontaneous, or unscripted, speech is recorded. Then the speaker would have signed a copyright transfer before she or he knew what was said. In such cases it is best to confirm the signature again after the recording. That is, when recording unscripted language use, ask the speakers to sign the forms a second time after the recording. Sometimes it is prudent to give the speakers a copy of the recording and offer them the option to retract their consent. For an extended discussion of this topic, see \cite{vanSon2008ifadv,VanSon2009Prom}.
+
+Drawing up a copyright transfer form should be done by a specialist in copyright law. In most cases, this is too much work (and too expensive). It is then best to take a boilerplate form and adapt it to the needs of the corpus. It must be stressed that the transfer forms should make clear, upfront, to subjects how the recordings and the personal data might be used. In practice, this means that the different options, e.g., publishing recordings and meta data on the internet, have to be written explicitly into the copyright transfer forms. A good guide seems to be that corpus creators are specific about the intended uses whenever possible. At the same time, an effort should be made to be inclusive and prepare for potential, future, uses by yourself and others. All the ``legal'' information has to be made available also in layman's terms in an informed consent declaration (see below). Obviously, subjects should have ample opportunity to ask questions about the procedures and use of the recordings. An example copyright transfer form can be found at the \href{http://www.fon.hum.uva.nl/IFA-SpokenLanguageCorpora/IFADVcorpus/Documents/AkteVanRechtenoverdracht.pdf}{IFA Dialog Video corpus} \cite{IFA}.
+
+\subsection{Informed consent}
+
+Having experimental subjects, or speakers, sign legal documents does not imply that they fully understand the effects their participation can have on their lives. However, it is paramount that all subjects fully understand the potential consequences of participating. To ensure that every subject has understood and accepted the (potential) consequences of their participation, they should sign an \emph{informed consent} document, e.g., \cite{FQS1024}. Informed consent is a {\em process} to enable a subject to make an {\em enlightened decision} whether to participate in a study or not ({\em Nuremberg Code, 1947}). The informed consent document should explain in plain and easy to understand language what will be expected from the participants, and what the consequences can be of their participation. This informed consent document should also state what will happen with their contributions. For example, if spontaneous dialogue is recorded and will be published on-line, it should be ensured that the speakers know about this. If such a publication on-line might possibly affect their future life or career prospects, this should also be made clear to the subjects (and ways should be found to prevent or remediate such outcomes). There are extensive regulations about how to execute the informed consent procedure and how to draw up the documentation and forms. The exact rules differ per country and might even differ per institute ethical committee. The rules as they are described in the Good Clinical Practice (GCP) guidelines are a good starting point as they cover the universal base \cite{ICH1996GCP}.
+
+Journals and conference publishers generally require informed consents from all subjects whose data are used in a publication. Special consent is required when pictures or video clips of subjects are used in a publication or presentation. In practice, \emph{both} signed copyright transfer forms \emph{and} informed consent documents are required before any data in a corpus can be used. And it cannot be stressed enough that both documents should contain clauses about \emph{all} intended and possible future uses of the data.
+
+\subsection{Privacy}
+
+It is generally accepted that researchers have a \emph{duty of confidentiality} with respect to informants and experimental subjects and should respect their privacy \footnote{The legal aspects of this subject are discussed below}, e.g., \cite{FQS1024}. Only in exceptional cases will the names or other identifying information of experimental subjects be revealed. This rule is embedded in the law and there are almost no exceptions when, e.g., minors or patients are involved. When co-authors or colleagues participate in experiments, it is common to use their initials in publications. However, names of external subjects should always be securely coded and initials are not considered secure. For an individual paper, enumerating subjects, e.g., $S_1$-$S_i$, often suffices. In a corpus, this can become unwieldy, especially in more complicated corpora containing multiple contribution from individual subjects, sometimes in different roles. Unless ethical rules require total anonymization, each subject should get an individual, fixed code, a token, that is valid for the complete corpus. It is obvious that the real names and contact information should never be stored with the corpus.
+
+If at all possible, subjects should get a (random) code at enrollment. Trying to fix the internal codes after recordings of experiments are completed is fraught with problems and frequently leads to persistent errors. The easiest system for subject coding is simply giving numbers or letters in order of enrollment. This can be [$S1\dots$], or [$A, \cdots , ZZ$]. It does not matter for such a procedure that some subjects will drop out. In special cases, it can be necessary to adopt more involved protocols. Needless to say that the decoding lists that link subject codes to identities and contact information should be stored and backed up securely.
+
+An example of a special case was the use of patients enrolled in long term follow up research. Many patients participated in several studies while it was not always clear which patients had already participated before. Unique subject codes were constructed by encrypting the unique hospital patient ID (using a password). This ensured that every patient's contribution to every study would be labelled with the same identifier token even when the previous contributions were not known. The encryption procedure was designed to make it impossible to extract personal information from the codes. Cryptographic protocols are very fragile and can easily fail. Caution must be exercised when using them.
+
+\noindent A few suggestions for handling subject privacy:
+\begin{itemize}
+\item Keep all personal and contact information securely off-site, make sure there is a printed paper back up at a secure site
+\item Remember that date-of-birth, zip codes, and IP addresses are sensitive information
+\item Assign each subject a unique anonymous code at enrollment and \emph{never} use a name or initials
+\item Subject codes should be sequential, random, or if that is not possible, cryptographically secure
+\item Use subject codes for \emph{all} references to subjects, internal and external
+\item Do not publish recognizable audio, pictures, or video without the explicit written consent of the subjects
+\item If sensitive information \emph{has} to be shared with outsiders, require a signed, legally binding, \emph{promise of confidentiality} \cite{FQS1024} or Non Disclosure Agreement (NDA).
+\end{itemize}
+
+\subsection{Licenses and moratoria}
+
+As discussed in section \ref{Copyrights}, the owner of the copyrights to the corpus must give written permission for use of any part of the corpus. This can be on a case-by-case basis, which is impractical, or more efficiently by way of a copyright license. A copyright license is a written permission to copy and distribute work under copyright, i.c., a corpus. A copyright license determines how a corpus can be used and by whom, and what can be done with the results. These notes will only discuss the \emph{Open Data} case \cite{OpenScienceData}, where a corpus is shared on liberal terms. 
+
+There are two families of copyright licenses relevant for \emph{Open Data} compatible corpora, \emph{Free and Open Source} licenses for code and software \cite{FSF,OSI}, and \emph{Creative Commons} licenses \cite{CreativeCommons} for all other materials. When choosing a license, it is strongly advice to adopt an existing license. In practice, adopting a newly written license has only downsides. Lists of popular licenses can be found at:
+\begin{itemize}
+\item \emph{Creative Commons} \cite{CreativeCommons}: \url{http://creativecommons.org/licenses/}
+\item \emph{Free and Open Source} \cite{OSI}: \url{http://opensource.org/licenses}
+\end{itemize}
+
+It is often impractical for a researcher to wait until her project is completed before adding her data to an \emph{Open Data} corpus. For logistic reasons, it might be even preferable to store all primary data directly in an existing corpus. In such cases, the researchers would not allow distribution of their data before they have finished their primary analysis and publication. This is handled by a \emph{moratorium} on the data. When the data are added to the corpus, the ``license'' specifies an agreed date, after which the data will be available to the ``public''. Alternatively, the data will be made available after the official publication of a certain paper. When constructing a corpus, the possible inclusion of such moratoria should be considered.
+
+\section{The GDPR}
+{\small \emph{Disclaimer: I am not a lawyer and this is not legal advice. Please consult your lawyer for legal advice about your project.}}
+\vskip 0.5cm
+
+\noindent The European General Data Protection Regulation (GDPR) rewards its own consideration. The GDPR is a comprehensive legal framework that governs the collection and processing of information about natural persons in the EU \cite{GDPR_EU}. The GDPR covers all collection and processing of data from EU citizens by anyone who offers goods or services, or who monitors EU data subjects, irrespective of where the data are stored or processed \cite{AllenOvery2016GDPR}. It comes into force 25 May 2018. Some countries have already implemented parts of the GDPR well before that date, e.g., the Netherlands. Its most reported aspect is a testimony to the determination of its authors to make even the largest of companies comply. The maximum fines are set to 20 million euros or 4\% of global turnover, whichever is larger. However, the goal of the GDPR is mostly to harmonize the EU privacy rules to foster market innovation while at the same time protecting the citizens' privacy from corporate abuse. To that latter end, anyone who collects or processes personal data should put the privacy interests of the subjects covered by these data first.
+
+The main concerns of the GDPR are to create a EU wide, uniform market space for information and changing the ways privacy issues are handled in non-research settings, e.g., commercial companies and public bodies. The inconveniences for science and research can mostly be seen as collateral damage. Several exceptions are made in the GDPR for research. However, many of these exceptions do \emph{not} cover health related research. And health related research is defined very broadly as anything that can conceivably be used to assess or influence the health status of natural persons. One relevant research exception of the GDPR covers secondary use, the use of existing data for different purposes, without having to obtain consent nor having to limit the duration of the use. With respect to shared speech and language corpora, it is not advisable to rely on such a secondary use exception. It is best to obtain informed consent from each subject for inclusion in a database, unless there are exceptionally pressing reasons and there is good legal advice.
+
+An important new focus of the GDPR is \emph{accountability}. It is not enough to \emph{be} in compliance, anyone who handles, collects, stores, or processes personal identifiable information (data controllers) must \emph{demonstrate} how they are in compliance with the GDPR \cite{AllenOvery2016GDPR,Art29DPWP,IAPP2016Top10}. This means that documentation must be maintained about all measures taken and procedures installed to ensure compliance by the owner of the data, i.e., the controller, and any other party processing the data.
+
+Before data can be collected or disseminated, the ethical and legal aspects must be evaluated. It must be clear what are the risks (to the subject) and benefits (to society) of the research and corpus.
+
+\noindent In general, before collecting or disseminating corpus data the following points have to be considered:
+\begin{itemize}
+\item Privacy Impact Assessment (PIA)
+\item Privacy by Design technology
+\item Approval from the Medical/Research Ethical Committee (M/REC)
+\item Consultation and/or approval from the relevant Data Protection Officer (DPO) or Privacy Officer (PO)
+\item Explicit, written informed consent by the data subjects, and copyright transfer
+\item Data Transfer Agreements (DTA), Non Disclosure Agreements (NDA), Promise of Confidentiality (PoC)
+\end{itemize}
+
+\subsection{Privacy Impact Assessment (PIA)}
+
+To be able to justify collecting and processing personal identifiable information (PII), it is important that the likely risks and benefits to the subject are known and that efforts are made to minimize these risks. A \emph{Privacy Impact Assessment}, or \emph{Data Protection Impact Assessment} (DPIA) in the GDPR, is defined as "a process which assists organizations in identifying and minimizing the privacy risks of new projects or policies" \cite{act2014conducting}. This means that all the possible consequences for the privacy of the subjects that might result from collecting, processing, and disseminating the intended data should be discovered as well as all the ways any negative consequences can be eliminated or minimized. An official PIA is mandatory, when "the processing is likely to result in a high risk to the rights and freedoms of natural persons" \cite{Art29DPWP}. However, running a critical assessment of the expected risks and benefits of the proposed project would be a good idea irrespective of the formal requirements of the law. It will deliver information that will help with the design of the informed consent forms and the corpus itself and will also help the ethical committees and the data protection officer to evaluate the proposal.
+
+How best to do a PIA is still an area of ongoing research \cite{wagner2017privacy}. Not surprisingly, there are yet no generally applicable frameworks to do a PIA in speech and language research. However, when creating a speech or language corpus, it will often suffice to think hard about what data to include and how to minimize the probability of unintended consequences. With this information, the ethical committee and data or privacy officers can better evaluate your plans and possibly point out areas needing improvement. It is very likely that these institutions will even demand such an assessment from you before they will even agree to evaluate your proposal. A well documented PIA will also play an important part in demonstrating compliance with the GDPR \cite{Art29DPWP}. Being able to demonstrate compliance is a prerequisite for being allowed to handle PII.
+
+Note that the PIA is a "living document" and should be updated whenever new technologies or information become available \cite{wagner2017privacy,wright2013comparative}. The PIA must certainly be updated when there is a change in the way data are handled that can affect the privacy risks. If the risks change, policies might have to be changed and possibly. In extreme cases, it might be necessary to contact the subjects about changed circumstances or try to obtain new informed consent.
+
+\subsection{Privacy by Design technology}
+
+Data security is hard, very hard. Therefore, the GDPR has build-in incentives to use technology that has security build-in from the start, what is called \emph{Privacy by Design} \cite{IAPP2016Top10,AnitaVocht2016,AllenOvery2016GDPR,ico2017Overview}. Privacy by Design starts with keeping information out of the corpus. The GDPR is only concerned with PII, i.e., information that can be linked to a natural person. Privacy by Design aims to prevent that stored information can be linked back to a natural person by unauthorized parties. That starts by preventing data breeches and data loss. What is not stored, cannot be lost or leaked, so the first line of defense is to keep the most obvious PII out of the corpus. There are direct identifiers, e.g., all contact information, and indirect identifiers, information that allows to differentiate a person from others, e.g., IP addresses. But it is well known that almost any information can be used, in combination with other facts, to identify a person, e.g., birthday, zip code, and birthplace \cite{sweeney2000simple}. For instance, some innocuous time and location information is generally enough to identify almost anyone \cite{de2013unique}. By keeping information that is not needed out of the corpus, the possibilities for and severity of data loss and breeches are reduced.
+
+\noindent Four methods are mentioned by name in the GDPR: Data minimization, Anonymization, pseudonymization, and encryption. 
+
+\paragraph{Data minimization} Obviously, what is not there cannot be lost or exposed. One of the prime objectives of privacy by design is to reduce the amount of data stored at all. The first approach is simply removing all data that is not necessary for the task at hand. All data that is left should be examined for precision. Whenever precision is not needed, remove it. Date of birth is a known privacy risk and almost never needed. Replace it with {\em age}. For young children, the age in months might be appropriate. For older subjects, decadal age brackets might be enough. For ages above 80, subjects might be pooled. Full zip codes are a privacy risk. Truncate them, or use broad regional areas.
+
+A special case are images, e.g., pictures, movies, MRI. These tend to contain metadata that should be stripped. If possible, add censor bars to cover the eyes in pictures and movies and use equivalent practices for MRI. Note that ``ear prints'' are like finger prints and the outer ear should be masked in MRI's too.
+
+\paragraph{Anonymization} After anonymization, it is impossible to link a data item to a person. Anonymous information falls outside the scope of the GDPR and can be used freely. This would make anonymization an attractive option for using information. There is a large body of research on the limits of anonymization \cite{henriksen2016re,ye2016survey}. Such research has shown that guidelines on de-identification published in the USA (HIPAA \cite{us2012guidance}) and practices proposed in the UK (the Care.data initiative \cite{presser2015care}) are inadequate to protect the identity of the subjects to the level of security that was intended. Under the GDPR, these ``de-identification'' practices are not considered anonymization or possibly not even good pseudonymization. All in all, the use of anonymized data in research suffers from security problems and is fraught with uncertainty and ethical questions \cite{rumbold2017critique}.
+
+In the current context, the results of the research on anonymization can be summarized as: If data is useful, it is not anonymous and if data is anonymous, it is not useful.
+
+\paragraph{Pseudonymization} With anonymization an elusive goal, the next best option is pseudo\-nymization. Pseudo\-nymization, or key-coding, is already the accepted norm in all research involving humans. Therefore, there is little that the GDPR will change in this respect. But pseudonymization is important as "good" pseudonymization is necessary for any research exemptions under the GDPR, derogations in GDPR parlance. Good pseudonymization should have no link between the personal identifiers it protects and the code used to identify the records. This means that, e.g., initials are \emph{not} good pseudonymization codes. Unencrypted hashes or message digests of personal information, e.g., names, email addresses, or patient id's, are not adequate as they can easily be broken. Simply run a list of all known names, email addresses, or patient id's through the hashing algorithm and pick the matching hash. However, using random codes or encrypted hashes are considered good pseudonymization. Do keep in mind that using encryption is tricky.
+
+\paragraph{Encryption} The use of encryption is mentioned in the GDPR as one of the components of \emph{Privacy by Design}. Encryption can be seen as the digital equivalent of ``under lock and key''. In practice, it means that all privacy sensitive data should be stored and transmitted in encrypted form. And as with real locks and keys, sensible key management procedures should be in place, and enforced. As encryption is explicitly mentioned in the GDPR, there is no excuse for \emph{not} encrypting all data when not in direct use. With respect to the use of encryption, the only sensible advice is to consult professionals. 
+
+As a minimum, projects should use full disk encryption on \emph{all} computers, laptops, and computer storage used. This means, \emph{Bitlocker} on Windows, \emph{Filefault} on Mac OSX, and \emph{LUKS} on Linux. A problem of these solutions is that they are not practical for data exchange between computer platforms. For all practical purposes, \emph{Bitlocker} and \emph{Filefault} volumes are only readable on, respectively, Windows and Apple computers. \emph{LUKS} is rather impractical to use outside of Linux computers. There are multi-platform alternatives that do run on all three computer operating systems, like the TrueCrypt successor \emph{VeraCrypt} (\url{https://www.veracrypt.fr}). Most likely, your institution will have a institution wide policy with regard to using encryption in computers (if not, they should have).
+
+It is important to realize that it is very likely a breach of the GDPR when privacy sensitive data are stored in any kind of public cloud storage. Projects working with privacy sensitive data should refrain from using \emph{any} kind of cloud storage for \emph{any} project data unless they get clearance by the responsible Data Protection Officer. That is, no Google Drive, Dropbox, OneDrive, or iCloud, for project data. This also holds for email communication that might (accidentally) contain sensitive data. Data should be securely encrypted whenever it is communicated or exchanged. Projects should also consider the use of approved secure email or message services if at all possible. In this matter, always consult with the Data Protection or Privacy Officer responsible.
+
+\paragraph{Repository direct access-analysis} A different option is to not distribute the data to be analyzed at all, but to bring the analysis to the data \cite{budin2015datashield}. Third parties that would like to analyze the data could specify the desired analysis in a known format. The owner of the data would then perform the analysis and return the results. If the results cannot be re-identified, privacy is preserved. This way, no one outside of the owner has access to PII. Examples of speech research would be to perform an extensive voice or spectral analysis followed by statistical modelling, or to train a speech recognizer from the data. In most cases, the results would not allow re-identification of the data subjects. The DataSHIELD Open Source project implements such a system in the field of epidemiology and genomics research \cite{DataSHIELD,DataSHIELD2014,wilson2017datashield,budin2015datashield}, the COINSTAC project does this for processing brain image data \cite{plis2016coinstac}. ViPAR \cite{carter2016vipar} is developed as a more general platform for repository direct access analysis and supports a broader array of functions.
+
+A {\em repository direct access analysis} can be envisaged as a kind of web-service where clients give the parameters of an analysis and the owner of the data runs the analysis. The client only receives the outcomes of the analysis. Precautions must be taken to prevent disclosures that might identify individuals, e.g., outliers, extreme values, and scatterplots are generally not shared. This service could be extended by running certified client software on the data inside ``sandboxes'' to, e.g., for deep learning and training classifiers and recognizers. After vetting the results for privacy risks, the results can then be disclosed and the sandboxed application can be destroyed. Properly implemented, such a system would obviate most privacy concerns.
+
+\subsection{Approval from the Medical/Research Ethical Committee (MEC/REC) and the relevant Data Protection Officer (DPO) or Privacy Officer (PO)}
+
+The collection and use of data for academic research requires approval of a Research Ethical Committee. When patients are involved, approval of a Medical Ethical Committee is required. These committees evaluate the risks and benefits of the proposed project and decide whether the benefits to society outweigh the risks to the subjects. Every institution will have their own procedures and requirements for this process. These committees will most certainly need to see all the legal paperwork, e.g., the Informed Consent and copyright transfer forms as well as all the data transfer agreements, non-disclosure agreements, and promises of confidentiality that will be used.
+
+To judge whether a proposed project strikes the right balance between risks and benefits, data about the expected risks and benefits are needed. The PIA and technical measures discussed above will help to evaluate the likely risks and benefits. 
+
+When something goes wrong and the corpus is somehow in breach of the GDPR, the owner of the corpus or the institution that created it, or both, will be held responsible. Naturally, those who bear the consequences of anything going wrong will have a decisive voice in determining whether and how the corpus will be constructed and distributed. Most big institutions will have a data protection officer or privacy officer, or a another person who is responsible for cleaning up after a data breach. These officers should be consulted before a corpus is constructed. Better, they should be consulted even before a corpus is designed. Most likely, their approval is needed before the start of the work.
+
+What is also needed in both evaluations is a data management plan \cite{AcademyFinland20DMP}. This plan gives detailed information on what data will be stored, for how long, and for what use, how it will be stored and disseminated, how it will be secured, and who are responsible. It will also describe the access and use policies and the procedures for consent retraction, if relevant, and breach notification. In short, everything necessary to show that the corpus is constructed and used in compliance with the GDPR.
+
+\subsection{Explicit, written informed consent by the data subjects, and copyright transfer}
+
+Central in the whole privacy discussions and regulation is the informed consent by the data subject. Data can be collected and processed if, and only if, the subject has given an explicit consent to the collection an processing. In the research context, this constitutes no change from the accepted standards. All research involving humans already has to be based on explicit informed consent well before the GDPR came into view. In clinical research this has been codified, in, e.g., the Good Clinical Practise guidelines \cite{ICH1996GCP}. Although all attention is focused on the GDPR, informed consent in a health care context is governed by the Clinical Trial Directive (CTD) and the upcoming Clinical Trials Regulation (CTR) \cite{dittrich2015esmod,EU2014CTR}. As health care is a concern of the member states of the EU, the consent rules are set by the member states too. This means that the rules vary across borders, complicating international collaborations and data sharing.
+
+Informed consent is not the signature on a form, but it is a process to enable a subject to make an {\em enlightened decision} to participate or not ({\em Nuremberg Code, 1947}). The GDPR states that consent can always be withdrawn, even retroactively by giving a limited {\em Right to be Forgotten}. A data subject can withdraw their consent at any moment for any reason. Data subjects can also ask for their data to be removed. Here there is a difference with the CTR, which too allows subjects to withdraw their consent at any moment, but does not require that data collected before withdrawal of the consent has to be removed. It is not clear whether these consent practices will converge. 
+
+Under the GDPR, consent must be specific. The use of the data and the time the data will be stored must be indicated in the informed consent. Any new use requires a new informed consent from the data subject. This too clashes with the CTR which allows more open ended nature of a one-time consent in medical research \cite{dittrich2015esmod}. It is obvious that requesting new consent for every new research question would be a burden on the data subjects and make reuse of data impractical and uneconomical. The differences between the approach of the GDPR and the CTR leads to ambiguity and uncertainty in the collection and use of data \cite{chassang2017impact}. How specific must an informed consent be? When have subjects the right to have their data removed from a project? What information must data subjects be given about the uses and users of their data?
+
+The subject of copyright transfers has been discussed in section \ref{Copyrights}. Note that the copyright transfer and its consequences also have to be part of the informed consent. 
+
+\subsection{Data Transfer Agreements (DTA), Non Disclosure Agreements (NDA), Promise of Confidentiality (PoC)}
+
+In the ideal case, the corpus contains only data that can be shared without restrictions because the subjects consented to full publication and both the ethical committees and data protection officers approved the sharing of the data. However, this is often not the case. Especially if the corpus contains health related information, e.g., pathological speech, the odds are that some or all of the information will have to carry restrictions on use. In practice, this means that anyone who wants to obtain and use the data will have to sign legally binding documents in which they agree to not disclose the data to others, to abstain from re-identifying the subjects, and to not divulge any information that might help others to re-identify the subjects. Users must also agree to destroy all copies of the data after a certain time limit or if they have been found in breech of the agreement. Those who obtain copies of the data must also agree to apply the required level of data security and notify the publisher (controller) of the data and the authorities of any security breeches in relation to the data.
+
+It might be prudent to investigate whether it is possible to include provisions in the agreements that require that the data must be destroyed in case of an imminent risk of re-identification of the subjects and that data from individual subjects must be deleted upon request (Right to be forgotten).
+
+Depending on the nature of the sensitive data that have to be protected and the relation with the user of the data, different legal instruments can be used: Data Transfer Agreements (DTA), Non Disclosure Agreements (NDA), Promise of Confidentiality (PoC). This choice can best be made in consultation with a legal department with experience in this matter. Writing such papers is work for legal specialists. The legal department that chooses the instrument will also know who should draw up these legal papers. 
+
+\section{Concluding remarks}\label{Conclusions}
+
+In theory, anything should be possible with the right {\em Informed Consent}. However, in practice the ethical committees will limit what can be asked from subjects. The rules say that a valid Informed consent must be specific and cannot be open ended. The wording of this rule will vary between EU member states. On the other hand, the principle of self-determination and the autonomy of the patient allow patients to make any data about their health status public, as TV-reality shows illustrate almost daily. It is currently unknown how this discrepancy between self-determination and autonomy of the patient and legal protection under the GDPR and CTR will work out.
+
+Irrespective of the way the questions about the limits of patient informed consent will be resolved, it is clear that those who want to publish or use corpora holding privacy sensitive data must become ``competent'' in the securing and protection of such data. Data should only be shared with partners and users that themselves have shown to be competent in handling sensitive data. Professional organizations and associations should strive to compile guidelines for handling research data in their field of expertise, e.g., like the {\em GCP} does for clinical tests. Such guidelines can become the focal points of binding Codes of Conduct (CoC) and Certification. Such binding CoC and certifications are the preferred way for streamline processing of sensitive data under the GDPR. 
+
+In many cases, it will not legally be possible to share data liberally. A promising solution for these cases is to bring the analysis to the data, instead of the data to the analysis. That is, the owners of the data set up a service where the analysis is performed on the data, but the researchers that request the analysis only see the outcomes. Such a service can often be satisfactorily secured against unwanted disclosure while still allowing many researchers ``anonymous'' access to the data.
+
+\section{Acknowledgements}
+
+This work has been made possible by an unrestricted research grant from Atos Medical (Horby, Sweden).
+
+\bibliographystyle{ieeetr}
+\bibliography{NotesOnCorpusConstruction} 
+
+\vskip 3cm
+\begin{center}
+\includegraphics[width=0.3\textwidth]{Pictures/CC-share-alike}\\
+This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.\\
+\copyright 2012-{\YEAR}  R.J.J.H. van Son
+\end{center}
+
+\end{document}
+
